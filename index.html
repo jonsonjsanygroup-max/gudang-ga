@@ -85,6 +85,24 @@
     }
     .divider { height: 0.5px; background: var(--border); margin: 1.5rem 0; }
 
+    .loading-state {
+      display: flex; align-items: center; gap: 10px;
+      padding: 1rem; background: var(--bg);
+      border: 0.5px solid var(--border); border-radius: var(--radius-md);
+      color: var(--text-muted); font-size: 14px;
+    }
+    .loading-state i { font-size: 18px; animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .error-state {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 1rem; background: #FCEBEB;
+      border: 0.5px solid #F09595; border-radius: var(--radius-md);
+      color: #A32D2D; font-size: 14px;
+    }
+    .error-state i { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .retry-link { color: var(--blue); cursor: pointer; text-decoration: underline; margin-top: 6px; display: inline-block; font-size: 13px; }
+
     .category-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
@@ -100,14 +118,12 @@
     .cat-btn.selected { background: var(--blue-light); border-color: var(--blue-mid); }
     .cat-btn.selected .cat-icon { color: var(--blue); }
     .cat-btn.selected .cat-name { color: var(--blue); }
-    .cat-icon { font-size: 22px; color: var(--text-muted); }
+    .cat-icon { font-size: 20px; color: var(--text-muted); }
     .cat-name { font-size: 11.5px; font-weight: 500; color: var(--text-muted); line-height: 1.3; }
 
     .sub-section {
-      margin-top: 10px;
-      border: 0.5px solid var(--border);
-      border-radius: var(--radius-md);
-      overflow: hidden; display: none;
+      margin-top: 10px; border: 0.5px solid var(--border);
+      border-radius: var(--radius-md); overflow: hidden; display: none;
     }
     .sub-section.visible { display: block; }
     .sub-header {
@@ -140,7 +156,6 @@
     }
     .qty-btn:hover { background: var(--surface); border-color: var(--border-strong); }
     #qty-input { text-align: center; width: 72px; flex-shrink: 0; }
-
     .notes-field { resize: vertical; min-height: 70px; }
 
     .submit-btn {
@@ -148,7 +163,7 @@
       background: var(--blue); color: #fff; border: none;
       border-radius: var(--radius-md); cursor: pointer;
       transition: background 0.15s; margin-top: 0.5rem;
-      font-family: 'DM Sans', sans-serif; letter-spacing: 0.01em;
+      font-family: 'DM Sans', sans-serif;
       display: flex; align-items: center; justify-content: center; gap: 8px;
     }
     .submit-btn:hover { background: var(--blue-dark); }
@@ -157,8 +172,7 @@
     .success-card {
       display: none; background: var(--green-bg);
       border: 0.5px solid var(--green-border);
-      border-radius: var(--radius-lg); padding: 2.5rem 1.5rem;
-      text-align: center;
+      border-radius: var(--radius-lg); padding: 2.5rem 1.5rem; text-align: center;
     }
     .success-card.visible { display: block; }
     .success-card i { font-size: 48px; color: var(--green-sub); margin-bottom: 12px; }
@@ -206,15 +220,10 @@
 
       <div class="field-group">
         <label class="field-label">Pilih kategori <span class="req">*</span></label>
-        <div class="category-grid" id="cat-grid"></div>
-        <div class="sub-section" id="sub-section">
-          <div class="sub-header">
-            <i class="ti ti-list"></i>
-            <span id="sub-header-text">Pilih jenis barang</span>
-          </div>
-          <div class="sub-items" id="sub-items"></div>
-          <div class="other-input-box" id="other-input-box">
-            <input type="text" id="other-item-input" placeholder="Tulis nama barang lainnya..." />
+        <div id="catalog-container">
+          <div class="loading-state">
+            <i class="ti ti-refresh"></i>
+            <span>Memuat daftar barang...</span>
           </div>
         </div>
       </div>
@@ -258,62 +267,87 @@
 
   <script>
     // ============================================================
-    // CATALOG — Tim GA bisa edit bagian ini untuk tambah/kurangi
-    // item. Format: "Nama Kategori": { icon: "ti-xxx", items: [] }
+    // GANTI dengan URL Google Apps Script Anda setelah deploy
     // ============================================================
-    const CATALOG = {
-      "Alat Tulis": {
-        icon: "ti-pencil",
-        items: ["Pena hitam", "Pena merah", "Pena biru", "Pensil", "Penghapus", "Penggaris", "Spidol", "Stabilo", "Tip-ex", "Cutter"]
-      },
-      "Kertas & Buku": {
-        icon: "ti-notebook",
-        items: ["Kertas A4 70gr", "Kertas A4 80gr", "Kertas F4", "Buku tulis", "Buku agenda", "Post-it", "Notepad", "Karton"]
-      },
-      "Stapler & Klip": {
-        icon: "ti-tool",
-        items: ["Stapler besar", "Stapler kecil", "Isi stapler besar", "Isi stapler kecil", "Klip kertas kecil", "Klip kertas besar", "Binder clip kecil", "Binder clip besar", "Pembuka stapler"]
-      },
-      "Tinta & Toner": {
-        icon: "ti-droplet",
-        items: ["Tinta printer hitam", "Tinta printer warna", "Toner hitam", "Toner warna", "Tinta stempel"]
-      },
-      "Map & Bantex": {
-        icon: "ti-folder",
-        items: ["Bantex A4", "Bantex F4", "Map plastik", "Map kertas", "Ordner besar", "Ordner kecil", "Hanging folder", "Box file"]
-      },
-      "Amplop & Label": {
-        icon: "ti-mail",
-        items: ["Amplop kecil", "Amplop folio", "Amplop coklat A4", "Amplop coklat F4", "Label stiker A4", "Label nama", "Selotip kecil", "Selotip besar", "Double tape"]
-      },
-      "Kebersihan": {
-        icon: "ti-sparkles",
-        items: ["Tisu meja", "Hand sanitizer", "Sabun cuci tangan", "Kantong sampah kecil", "Kantong sampah besar", "Cairan pembersih", "Lap microfiber"]
-      },
-      "Elektronik & Baterai": {
-        icon: "ti-bolt",
-        items: ["Baterai AA", "Baterai AAA", "Kabel USB", "Flash disk", "Mouse", "Extension kabel", "Earphone"]
-      }
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx9K52r5yWpPpObQ4RCA1a_iQZ8DnJRW0InyOBSh7Ya_mRyYXMj1nIc6I5cpaJxcKcY/exec';
+
+    // Icon otomatis per nama kategori. Tambahkan di sini kalau
+    // tim GA membuat kategori baru di sheet.
+    const CATEGORY_ICONS = {
+      'Alat Tulis':           'ti-pencil',
+      'Kertas & Buku':        'ti-notebook',
+      'Stapler & Klip':       'ti-tool',
+      'Tinta & Toner':        'ti-droplet',
+      'Map & Bantex':         'ti-folder',
+      'Amplop & Label':       'ti-mail',
+      'Kebersihan':           'ti-sparkles',
+      'Elektronik & Baterai': 'ti-bolt',
     };
+    const DEFAULT_ICON = 'ti-package';
 
-    // ============================================================
-    // GANTI URL INI dengan URL Google Apps Script Anda setelah deploy
-    // ============================================================
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwerRzR0_hLtzw0fKFrBmPc8yZT-bXucHX3k0ZHdk-DEQssbvY3rr7iaLB6Mk8qXWHh/exec';
-
+    let catalog = {};
     let selectedCat = '';
     let selectedItem = '';
 
-    function buildCatalog() {
-      const grid = document.getElementById('cat-grid');
-      Object.keys(CATALOG).forEach(cat => {
+    async function loadCatalog() {
+      try {
+        const res = await fetch(SCRIPT_URL);
+        catalog = await res.json();
+        renderCatalog();
+      } catch(e) {
+        document.getElementById('catalog-container').innerHTML = `
+          <div class="error-state">
+            <i class="ti ti-alert-circle"></i>
+            <div>
+              <div>Gagal memuat daftar barang. Cek koneksi internet.</div>
+              <span class="retry-link" onclick="retryLoad()">Coba lagi</span>
+            </div>
+          </div>`;
+      }
+    }
+
+    function retryLoad() {
+      document.getElementById('catalog-container').innerHTML = `
+        <div class="loading-state">
+          <i class="ti ti-refresh"></i>
+          <span>Memuat ulang daftar barang...</span>
+        </div>`;
+      loadCatalog();
+    }
+
+    function renderCatalog() {
+      const container = document.getElementById('catalog-container');
+      container.innerHTML = '';
+
+      const grid = document.createElement('div');
+      grid.className = 'category-grid';
+      grid.id = 'cat-grid';
+
+      Object.keys(catalog).forEach(cat => {
+        const icon = CATEGORY_ICONS[cat] || DEFAULT_ICON;
         const btn = document.createElement('button');
         btn.className = 'cat-btn';
         btn.dataset.cat = cat;
-        btn.innerHTML = `<i class="ti ${CATALOG[cat].icon} cat-icon"></i><span class="cat-name">${cat}</span>`;
+        btn.innerHTML = `<i class="ti ${icon} cat-icon"></i><span class="cat-name">${cat}</span>`;
         btn.onclick = () => selectCat(cat, btn);
         grid.appendChild(btn);
       });
+
+      const subSection = document.createElement('div');
+      subSection.className = 'sub-section';
+      subSection.id = 'sub-section';
+      subSection.innerHTML = `
+        <div class="sub-header">
+          <i class="ti ti-list"></i>
+          <span id="sub-header-text">Pilih jenis barang</span>
+        </div>
+        <div class="sub-items" id="sub-items"></div>
+        <div class="other-input-box" id="other-input-box">
+          <input type="text" id="other-item-input" placeholder="Tulis nama barang lainnya..." />
+        </div>`;
+
+      container.appendChild(grid);
+      container.appendChild(subSection);
     }
 
     function selectCat(cat, btn) {
@@ -335,7 +369,7 @@
       otherBox.classList.remove('visible');
       document.getElementById('other-item-input').value = '';
 
-      CATALOG[cat].items.forEach(item => {
+      (catalog[cat] || []).forEach(item => {
         const chip = document.createElement('button');
         chip.className = 'item-chip';
         chip.textContent = item;
@@ -375,7 +409,7 @@
       const nama = document.getElementById('nama').value.trim();
       const dept = document.getElementById('dept').value.trim();
       const qty = document.getElementById('qty-input').value;
-      const unit = document.getElementById('unit-sel').value;
+      const satuan = document.getElementById('unit-sel').value;
       const catatan = document.getElementById('catatan').value.trim();
 
       let namaBarang = selectedItem;
@@ -395,7 +429,7 @@
       btn.innerHTML = '<i class="ti ti-loader-2"></i> Mengirim...';
 
       const timestamp = new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' });
-      const payload = { timestamp, nama, dept, kategori: selectedCat, namaBarang, jumlah: qty, satuan: unit, catatan };
+      const payload = { timestamp, nama, dept, kategori: selectedCat, namaBarang, jumlah: qty, satuan, catatan };
 
       try {
         await fetch(SCRIPT_URL, {
@@ -422,11 +456,6 @@
       document.getElementById('dept').value = '';
       document.getElementById('catatan').value = '';
       document.getElementById('qty-input').value = '1';
-      document.getElementById('other-item-input').value = '';
-      document.getElementById('other-input-box').classList.remove('visible');
-      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
-      document.getElementById('sub-section').classList.remove('visible');
-      document.getElementById('sub-items').innerHTML = '';
       selectedCat = '';
       selectedItem = '';
       const btn = document.getElementById('submit-btn');
@@ -434,9 +463,10 @@
       btn.innerHTML = '<i class="ti ti-send"></i> Kirim Data';
       document.getElementById('main-form').style.display = 'block';
       document.getElementById('success-card').classList.remove('visible');
+      loadCatalog();
     }
 
-    buildCatalog();
+    loadCatalog();
   </script>
 </body>
 </html>
