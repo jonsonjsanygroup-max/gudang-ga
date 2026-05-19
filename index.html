@@ -9,181 +9,107 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
   <style>
     :root {
-      --blue: #185FA5;
-      --blue-light: #E6F1FB;
-      --blue-mid: #378ADD;
-      --blue-dark: #0C447C;
-      --green-bg: #EAF3DE;
-      --green-border: #639922;
-      --green-text: #27500A;
-      --green-sub: #3B6D11;
-      --red: #E24B4A;
-      --bg: #F7F6F2;
-      --surface: #FFFFFF;
-      --border: rgba(0,0,0,0.12);
-      --border-strong: rgba(0,0,0,0.22);
-      --text: #1a1a18;
-      --text-muted: #6b6b67;
-      --text-hint: #9b9b96;
-      --radius-md: 8px;
-      --radius-lg: 14px;
+      --blue: #185FA5; --blue-light: #E6F1FB; --blue-mid: #378ADD; --blue-dark: #0C447C;
+      --green-bg: #EAF3DE; --green-border: #639922; --green-text: #27500A; --green-sub: #3B6D11;
+      --red: #E24B4A; --bg: #F7F6F2; --surface: #FFFFFF;
+      --border: rgba(0,0,0,0.12); --border-strong: rgba(0,0,0,0.22);
+      --text: #1a1a18; --text-muted: #6b6b67; --text-hint: #9b9b96;
+      --radius-md: 8px; --radius-lg: 14px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      padding: 2rem 1rem 4rem;
-    }
-    .form-wrap {
-      max-width: 500px;
-      margin: 0 auto;
-      background: var(--surface);
-      border-radius: var(--radius-lg);
-      border: 0.5px solid var(--border);
-      padding: 2rem 1.75rem;
-      box-shadow: 0 2px 24px rgba(0,0,0,0.06);
-    }
-    .form-header {
-      text-align: center;
-      margin-bottom: 2rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 0.5px solid var(--border);
-    }
-    .logo-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--bg); border: 0.5px solid var(--border);
-      border-radius: 20px; padding: 6px 14px; margin-bottom: 1rem;
-    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 2rem 1rem 4rem; }
+    .form-wrap { max-width: 500px; margin: 0 auto; background: var(--surface); border-radius: var(--radius-lg); border: 0.5px solid var(--border); padding: 2rem 1.75rem; box-shadow: 0 2px 24px rgba(0,0,0,0.06); }
+    .form-header { text-align: center; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid var(--border); }
+    .logo-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--bg); border: 0.5px solid var(--border); border-radius: 20px; padding: 6px 14px; margin-bottom: 1rem; }
     .logo-badge i { font-size: 17px; color: var(--text-muted); }
     .logo-badge span { font-size: 12px; color: var(--text-muted); font-weight: 500; }
-    .form-title { font-size: 22px; font-weight: 500; color: var(--text); margin-bottom: 5px; }
+    .form-title { font-size: 22px; font-weight: 500; margin-bottom: 5px; }
     .form-sub { font-size: 14px; color: var(--text-muted); }
-
-    .section-label {
-      font-size: 10.5px; font-weight: 500; color: var(--text-hint);
-      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem;
-    }
+    .section-label { font-size: 10.5px; font-weight: 500; color: var(--text-hint); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 1rem; }
     .field-group { margin-bottom: 1.2rem; }
-    .field-label {
-      display: block; font-size: 13px; font-weight: 500;
-      color: var(--text-muted); margin-bottom: 6px;
-    }
+    .field-label { display: block; font-size: 13px; font-weight: 500; color: var(--text-muted); margin-bottom: 6px; }
     .req { color: var(--red); margin-left: 2px; }
     input[type="text"], input[type="number"], select, textarea {
-      width: 100%; padding: 10px 12px; font-size: 15px;
-      background: var(--bg); border: 0.5px solid var(--border);
-      border-radius: var(--radius-md); color: var(--text);
-      font-family: 'DM Sans', sans-serif; outline: none;
-      transition: border-color 0.15s, box-shadow 0.15s;
+      width: 100%; padding: 10px 12px; font-size: 15px; background: var(--bg);
+      border: 0.5px solid var(--border); border-radius: var(--radius-md); color: var(--text);
+      font-family: 'DM Sans', sans-serif; outline: none; transition: border-color 0.15s, box-shadow 0.15s;
     }
-    input:focus, select:focus, textarea:focus {
-      border-color: var(--blue-mid);
-      box-shadow: 0 0 0 3px rgba(55,138,221,0.13);
-      background: var(--surface);
-    }
+    input:focus, select:focus, textarea:focus { border-color: var(--blue-mid); box-shadow: 0 0 0 3px rgba(55,138,221,0.13); background: var(--surface); }
     .divider { height: 0.5px; background: var(--border); margin: 1.5rem 0; }
 
-    .loading-state {
-      display: flex; align-items: center; gap: 10px;
-      padding: 1rem; background: var(--bg);
-      border: 0.5px solid var(--border); border-radius: var(--radius-md);
-      color: var(--text-muted); font-size: 14px;
-    }
+    /* Loading / error */
+    .loading-state { display: flex; align-items: center; gap: 10px; padding: 1rem; background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-md); color: var(--text-muted); font-size: 14px; }
     .loading-state i { font-size: 18px; animation: spin 1s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
-
-    .error-state {
-      display: flex; align-items: flex-start; gap: 10px;
-      padding: 1rem; background: #FCEBEB;
-      border: 0.5px solid #F09595; border-radius: var(--radius-md);
-      color: #A32D2D; font-size: 14px;
-    }
-    .error-state i { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .error-state { display: flex; align-items: flex-start; gap: 10px; padding: 1rem; background: #FCEBEB; border: 0.5px solid #F09595; border-radius: var(--radius-md); color: #A32D2D; font-size: 14px; }
     .retry-link { color: var(--blue); cursor: pointer; text-decoration: underline; margin-top: 6px; display: inline-block; font-size: 13px; }
 
-    .category-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-      gap: 8px;
-    }
-    .cat-btn {
-      display: flex; flex-direction: column; align-items: center; gap: 6px;
-      padding: 12px 6px; background: var(--bg);
-      border: 0.5px solid var(--border); border-radius: var(--radius-md);
-      cursor: pointer; transition: all 0.15s; text-align: center; width: 100%;
-    }
+    /* Category */
+    .category-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 8px; }
+    .cat-btn { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 6px; background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-md); cursor: pointer; transition: all 0.15s; text-align: center; width: 100%; }
     .cat-btn:hover { background: var(--surface); border-color: var(--border-strong); }
     .cat-btn.selected { background: var(--blue-light); border-color: var(--blue-mid); }
-    .cat-btn.selected .cat-icon { color: var(--blue); }
-    .cat-btn.selected .cat-name { color: var(--blue); }
+    .cat-btn.selected .cat-icon, .cat-btn.selected .cat-name { color: var(--blue); }
     .cat-icon { font-size: 20px; color: var(--text-muted); }
     .cat-name { font-size: 11.5px; font-weight: 500; color: var(--text-muted); line-height: 1.3; }
 
-    .sub-section {
-      margin-top: 10px; border: 0.5px solid var(--border);
-      border-radius: var(--radius-md); overflow: hidden; display: none;
-    }
+    /* Sub items */
+    .sub-section { margin-top: 10px; border: 0.5px solid var(--border); border-radius: var(--radius-md); overflow: hidden; display: none; }
     .sub-section.visible { display: block; }
-    .sub-header {
-      display: flex; align-items: center; gap: 8px;
-      padding: 9px 14px; background: var(--bg);
-      border-bottom: 0.5px solid var(--border);
-    }
+    .sub-header { display: flex; align-items: center; gap: 8px; padding: 9px 14px; background: var(--bg); border-bottom: 0.5px solid var(--border); }
     .sub-header i { font-size: 15px; color: var(--text-muted); }
     .sub-header span { font-size: 12.5px; color: var(--text-muted); font-weight: 500; }
     .sub-items { padding: 10px; display: flex; flex-wrap: wrap; gap: 7px; }
-    .item-chip {
-      padding: 6px 13px; background: var(--surface);
-      border: 0.5px solid var(--border); border-radius: 20px;
-      font-size: 13px; font-weight: 500; color: var(--text-muted);
-      cursor: pointer; transition: all 0.15s; white-space: nowrap;
-      font-family: 'DM Sans', sans-serif;
-    }
+    .item-chip { padding: 6px 13px; background: var(--surface); border: 0.5px solid var(--border); border-radius: 20px; font-size: 13px; font-weight: 500; color: var(--text-muted); cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
     .item-chip:hover { background: var(--bg); border-color: var(--border-strong); }
     .item-chip.selected { background: var(--blue-light); border-color: var(--blue-mid); color: var(--blue); }
-    .other-input-box { padding: 0 10px 10px; display: none; }
-    .other-input-box.visible { display: block; }
 
-    .qty-row { display: flex; align-items: center; gap: 8px; }
-    .qty-btn {
-      width: 38px; height: 38px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      background: var(--bg); border: 0.5px solid var(--border);
-      border-radius: var(--radius-md); cursor: pointer;
-      font-size: 20px; color: var(--text); transition: background 0.1s;
-    }
+    /* Lainnya button — standalone */
+    .lainnya-btn { display: flex; align-items: center; gap: 8px; margin-top: 10px; padding: 9px 14px; background: var(--bg); border: 0.5px dashed var(--border-strong); border-radius: var(--radius-md); cursor: pointer; font-size: 13px; font-weight: 500; color: var(--text-muted); font-family: 'DM Sans', sans-serif; width: 100%; transition: all 0.15s; }
+    .lainnya-btn:hover { background: var(--surface); color: var(--text); }
+    .lainnya-btn.active { background: var(--blue-light); border-color: var(--blue-mid); color: var(--blue); }
+    .lainnya-form { display: none; margin-top: 8px; background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-md); padding: 12px; }
+    .lainnya-form.visible { display: block; }
+    .lainnya-row { display: flex; gap: 8px; align-items: flex-end; flex-wrap: wrap; }
+    .lainnya-row input[type="text"] { flex: 1; min-width: 140px; }
+
+    /* Qty row */
+    .qty-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+    .qty-btn { width: 36px; height: 36px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-md); cursor: pointer; font-size: 20px; color: var(--text); transition: background 0.1s; }
     .qty-btn:hover { background: var(--surface); border-color: var(--border-strong); }
-    #qty-input { text-align: center; width: 72px; flex-shrink: 0; }
-    .notes-field { resize: vertical; min-height: 70px; }
+    .qty-input-sm { text-align: center; width: 60px !important; flex-shrink: 0; }
 
-    .submit-btn {
-      width: 100%; padding: 13px; font-size: 15px; font-weight: 500;
-      background: var(--blue); color: #fff; border: none;
-      border-radius: var(--radius-md); cursor: pointer;
-      transition: background 0.15s; margin-top: 0.5rem;
-      font-family: 'DM Sans', sans-serif;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
-    }
+    /* Add to cart button */
+    .add-btn { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 12px; width: 100%; padding: 10px; font-size: 14px; font-weight: 500; background: var(--surface); color: var(--blue); border: 0.5px solid var(--blue-mid); border-radius: var(--radius-md); cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.15s; }
+    .add-btn:hover { background: var(--blue-light); }
+    .add-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* Cart / daftar barang */
+    .cart-section { margin-top: 1rem; }
+    .cart-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .cart-title { font-size: 10.5px; font-weight: 500; color: var(--text-hint); letter-spacing: 0.08em; text-transform: uppercase; }
+    .cart-count { font-size: 12px; font-weight: 500; color: var(--blue); background: var(--blue-light); padding: 2px 8px; border-radius: 10px; }
+    .cart-empty { padding: 12px; text-align: center; font-size: 13px; color: var(--text-hint); background: var(--bg); border: 0.5px dashed var(--border); border-radius: var(--radius-md); }
+    .cart-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-md); margin-bottom: 6px; }
+    .cart-item-info { flex: 1; min-width: 0; }
+    .cart-item-name { font-size: 14px; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .cart-item-meta { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+    .cart-item-qty { font-size: 13px; font-weight: 500; color: var(--text); white-space: nowrap; flex-shrink: 0; }
+    .cart-remove { background: none; border: none; cursor: pointer; color: var(--text-hint); padding: 4px; display: flex; align-items: center; flex-shrink: 0; transition: color 0.15s; }
+    .cart-remove:hover { color: var(--red); }
+
+    /* Submit */
+    .submit-btn { width: 100%; padding: 13px; font-size: 15px; font-weight: 500; background: var(--blue); color: #fff; border: none; border-radius: var(--radius-md); cursor: pointer; transition: background 0.15s; margin-top: 0.5rem; font-family: 'DM Sans', sans-serif; display: flex; align-items: center; justify-content: center; gap: 8px; }
     .submit-btn:hover { background: var(--blue-dark); }
     .submit-btn:disabled { background: #d0d0cc; color: #999; cursor: not-allowed; }
 
-    .success-card {
-      display: none; background: var(--green-bg);
-      border: 0.5px solid var(--green-border);
-      border-radius: var(--radius-lg); padding: 2.5rem 1.5rem; text-align: center;
-    }
+    /* Success */
+    .success-card { display: none; background: var(--green-bg); border: 0.5px solid var(--green-border); border-radius: var(--radius-lg); padding: 2.5rem 1.5rem; text-align: center; }
     .success-card.visible { display: block; }
     .success-card i { font-size: 48px; color: var(--green-sub); margin-bottom: 12px; }
     .success-title { font-size: 18px; font-weight: 500; color: var(--green-text); margin-bottom: 6px; }
     .success-sub { font-size: 14px; color: var(--green-sub); }
-    .reset-btn {
-      margin-top: 1.25rem; padding: 9px 24px; font-size: 14px;
-      background: transparent; border: 0.5px solid var(--green-border);
-      color: var(--green-sub); border-radius: var(--radius-md);
-      cursor: pointer; font-family: 'DM Sans', sans-serif; font-weight: 500;
-    }
+    .reset-btn { margin-top: 1.25rem; padding: 9px 24px; font-size: 14px; background: transparent; border: 0.5px solid var(--green-border); color: var(--green-sub); border-radius: var(--radius-md); cursor: pointer; font-family: 'DM Sans', sans-serif; font-weight: 500; }
     .reset-btn:hover { background: rgba(99,153,34,0.08); }
 
     @media (max-width: 480px) {
@@ -193,280 +119,343 @@
   </style>
 </head>
 <body>
-  <div class="form-wrap">
-    <div class="form-header">
-      <div class="logo-badge">
-        <i class="ti ti-building-warehouse"></i>
-        <span>General Affairs — Gudang Kantor</span>
-      </div>
-      <h1 class="form-title">Pengambilan Barang</h1>
-      <p class="form-sub">Isi form ini setiap kali mengambil barang dari gudang GA</p>
+<div class="form-wrap">
+  <div class="form-header">
+    <div class="logo-badge">
+      <i class="ti ti-building-warehouse"></i>
+      <span>General Affairs — Gudang Kantor</span>
+    </div>
+    <h1 class="form-title">Pengambilan Barang</h1>
+    <p class="form-sub">Isi form ini setiap kali mengambil barang dari gudang GA</p>
+  </div>
+
+  <div id="main-form">
+    <p class="section-label">Data pengambil</p>
+    <div class="field-group">
+      <label class="field-label" for="nama">Nama lengkap <span class="req">*</span></label>
+      <input type="text" id="nama" placeholder="Masukkan nama lengkap" autocomplete="name" />
+    </div>
+    <div class="field-group">
+      <label class="field-label" for="dept">Departemen <span class="req">*</span></label>
+      <input type="text" id="dept" placeholder="Contoh: Marketing, Finance, IT..." />
     </div>
 
-    <div id="main-form">
-      <p class="section-label">Data pengambil</p>
+    <div class="divider"></div>
+    <p class="section-label">Tambah barang</p>
 
-      <div class="field-group">
-        <label class="field-label" for="nama">Nama lengkap <span class="req">*</span></label>
-        <input type="text" id="nama" placeholder="Masukkan nama lengkap" autocomplete="name" />
+    <!-- Catalog -->
+    <div class="field-group">
+      <label class="field-label">Pilih kategori</label>
+      <div id="catalog-container">
+        <div class="loading-state"><i class="ti ti-refresh"></i><span>Memuat daftar barang...</span></div>
       </div>
-      <div class="field-group">
-        <label class="field-label" for="dept">Departemen <span class="req">*</span></label>
-        <input type="text" id="dept" placeholder="Contoh: Marketing, Finance, IT..." />
+    </div>
+
+    <!-- Qty picker for catalog item -->
+    <div id="item-qty-section" style="display:none;">
+      <div class="qty-row">
+        <button class="qty-btn" onclick="changeQty('item',-1)">−</button>
+        <input type="number" id="item-qty" class="qty-input-sm" value="1" min="1" max="999" />
+        <button class="qty-btn" onclick="changeQty('item',1)">+</button>
+        <select id="item-unit" style="flex:1;">
+          <option>pcs</option><option>box</option><option>pack</option>
+          <option>rim</option><option>lusin</option><option>roll</option>
+          <option>botol</option><option>buah</option>
+        </select>
       </div>
-
-      <div class="divider"></div>
-      <p class="section-label">Barang yang diambil</p>
-
-      <div class="field-group">
-        <label class="field-label">Pilih kategori <span class="req">*</span></label>
-        <div id="catalog-container">
-          <div class="loading-state">
-            <i class="ti ti-refresh"></i>
-            <span>Memuat daftar barang...</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label">Jumlah <span class="req">*</span></label>
-        <div class="qty-row">
-          <button class="qty-btn" onclick="changeQty(-1)" aria-label="Kurangi">−</button>
-          <input type="number" id="qty-input" value="1" min="1" max="999" />
-          <button class="qty-btn" onclick="changeQty(1)" aria-label="Tambah">+</button>
-          <select id="unit-sel" style="flex:1;">
-            <option>pcs</option>
-            <option>box</option>
-            <option>pack</option>
-            <option>rim</option>
-            <option>lusin</option>
-            <option>roll</option>
-            <option>botol</option>
-            <option>buah</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="field-group">
-        <label class="field-label" for="catatan">Catatan (opsional)</label>
-        <textarea class="notes-field" id="catatan" placeholder="Keterangan tambahan jika perlu..."></textarea>
-      </div>
-
-      <button class="submit-btn" id="submit-btn" onclick="handleSubmit()">
-        <i class="ti ti-send"></i> Kirim Data
+      <button class="add-btn" id="add-item-btn" onclick="addToCart()">
+        <i class="ti ti-plus"></i> Tambah ke daftar
       </button>
     </div>
 
-    <div class="success-card" id="success-card">
-      <i class="ti ti-circle-check"></i>
-      <p class="success-title">Data berhasil dikirim!</p>
-      <p class="success-sub">Pengambilan barang sudah tercatat di Google Sheets tim GA.</p>
-      <button class="reset-btn" onclick="resetForm()">Ambil barang lagi</button>
+    <!-- Lainnya standalone -->
+    <button class="lainnya-btn" id="lainnya-toggle" onclick="toggleLainnya()">
+      <i class="ti ti-pencil-plus"></i> Barang tidak ada di daftar? Isi manual
+    </button>
+    <div class="lainnya-form" id="lainnya-form">
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">Nama barang & kategori</div>
+      <input type="text" id="lainnya-nama" placeholder="Nama barang..." style="margin-bottom:8px;" />
+      <input type="text" id="lainnya-kat" placeholder="Kategori (opsional)..." style="margin-bottom:8px;" />
+      <div class="qty-row" style="margin-top:0;">
+        <button class="qty-btn" onclick="changeQty('lainnya',-1)">−</button>
+        <input type="number" id="lainnya-qty" class="qty-input-sm" value="1" min="1" max="999" />
+        <button class="qty-btn" onclick="changeQty('lainnya',1)">+</button>
+        <select id="lainnya-unit" style="flex:1;">
+          <option>pcs</option><option>box</option><option>pack</option>
+          <option>rim</option><option>lusin</option><option>roll</option>
+          <option>botol</option><option>buah</option>
+        </select>
+      </div>
+      <button class="add-btn" onclick="addLainnya()" style="margin-top:10px;">
+        <i class="ti ti-plus"></i> Tambah ke daftar
+      </button>
     </div>
+
+    <!-- Cart -->
+    <div class="cart-section">
+      <div class="divider"></div>
+      <div class="cart-header">
+        <span class="cart-title">Daftar barang diambil</span>
+        <span class="cart-count" id="cart-count" style="display:none;">0 item</span>
+      </div>
+      <div id="cart-list">
+        <div class="cart-empty">Belum ada barang ditambahkan</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="field-group">
+      <label class="field-label" for="catatan">Catatan (opsional)</label>
+      <textarea id="catatan" style="resize:vertical;min-height:70px;" placeholder="Keterangan tambahan jika perlu..."></textarea>
+    </div>
+
+    <button class="submit-btn" id="submit-btn" onclick="handleSubmit()">
+      <i class="ti ti-send"></i> Kirim Semua Data
+    </button>
   </div>
 
-  <script>
-    // ============================================================
-    // GANTI dengan URL Google Apps Script Anda setelah deploy
-    // ============================================================
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx9K52r5yWpPpObQ4RCA1a_iQZ8DnJRW0InyOBSh7Ya_mRyYXMj1nIc6I5cpaJxcKcY/exec';
+  <div class="success-card" id="success-card">
+    <i class="ti ti-circle-check"></i>
+    <p class="success-title">Data berhasil dikirim!</p>
+    <p class="success-sub">Pengambilan barang sudah tercatat di Google Sheets tim GA.</p>
+    <button class="reset-btn" onclick="resetForm()">Ambil barang lagi</button>
+  </div>
+</div>
 
-    // Icon otomatis per nama kategori. Tambahkan di sini kalau
-    // tim GA membuat kategori baru di sheet.
-    const CATEGORY_ICONS = {
-      'Alat Tulis':           'ti-pencil',
-      'Kertas & Buku':        'ti-notebook',
-      'Stapler & Klip':       'ti-tool',
-      'Tinta & Toner':        'ti-droplet',
-      'Map & Bantex':         'ti-folder',
-      'Amplop & Label':       'ti-mail',
-      'Kebersihan':           'ti-sparkles',
-      'Elektronik & Baterai': 'ti-bolt',
-    };
-    const DEFAULT_ICON = 'ti-package';
+<script>
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwDnCV4cQONa745zOSyftoHDe6okhKJ09E4ZB7dgwv2SnEzMeGywOwkuAPiXah5CUl1/exec';
 
-    let catalog = {};
-    let selectedCat = '';
-    let selectedItem = '';
+  const CATEGORY_ICONS = {
+    'Alat Tulis':'ti-pencil','Kertas & Buku':'ti-notebook','Stapler & Klip':'ti-tool',
+    'Tinta & Toner':'ti-droplet','Map & Bantex':'ti-folder','Amplop & Label':'ti-mail',
+    'Kebersihan':'ti-sparkles','Elektronik & Baterai':'ti-bolt'
+  };
+  const DEFAULT_ICON = 'ti-package';
 
-    async function loadCatalog() {
-      try {
-        const res = await fetch(SCRIPT_URL);
-        catalog = await res.json();
-        renderCatalog();
-      } catch(e) {
-        document.getElementById('catalog-container').innerHTML = `
-          <div class="error-state">
-            <i class="ti ti-alert-circle"></i>
-            <div>
-              <div>Gagal memuat daftar barang. Cek koneksi internet.</div>
-              <span class="retry-link" onclick="retryLoad()">Coba lagi</span>
-            </div>
-          </div>`;
-      }
-    }
+  let catalog = {};
+  let selectedCat = '';
+  let selectedItem = '';
+  let cart = [];
 
-    function retryLoad() {
+  // ── Load catalog ──
+  async function loadCatalog() {
+    try {
+      const res = await fetch(SCRIPT_URL);
+      catalog = await res.json();
+      renderCatalog();
+    } catch(e) {
       document.getElementById('catalog-container').innerHTML = `
-        <div class="loading-state">
-          <i class="ti ti-refresh"></i>
-          <span>Memuat ulang daftar barang...</span>
+        <div class="error-state"><i class="ti ti-alert-circle"></i>
+          <div>Gagal memuat daftar barang.<br><span class="retry-link" onclick="retryLoad()">Coba lagi</span></div>
         </div>`;
-      loadCatalog();
     }
+  }
 
-    function renderCatalog() {
-      const container = document.getElementById('catalog-container');
-      container.innerHTML = '';
-
-      const grid = document.createElement('div');
-      grid.className = 'category-grid';
-      grid.id = 'cat-grid';
-
-      Object.keys(catalog).forEach(cat => {
-        const icon = CATEGORY_ICONS[cat] || DEFAULT_ICON;
-        const btn = document.createElement('button');
-        btn.className = 'cat-btn';
-        btn.dataset.cat = cat;
-        btn.innerHTML = `<i class="ti ${icon} cat-icon"></i><span class="cat-name">${cat}</span>`;
-        btn.onclick = () => selectCat(cat, btn);
-        grid.appendChild(btn);
-      });
-
-      const subSection = document.createElement('div');
-      subSection.className = 'sub-section';
-      subSection.id = 'sub-section';
-      subSection.innerHTML = `
-        <div class="sub-header">
-          <i class="ti ti-list"></i>
-          <span id="sub-header-text">Pilih jenis barang</span>
-        </div>
-        <div class="sub-items" id="sub-items"></div>
-        <div class="other-input-box" id="other-input-box">
-          <input type="text" id="other-item-input" placeholder="Tulis nama barang lainnya..." />
-        </div>`;
-
-      container.appendChild(grid);
-      container.appendChild(subSection);
-    }
-
-    function selectCat(cat, btn) {
-      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
-      btn.classList.add('selected');
-      selectedCat = cat;
-      selectedItem = '';
-      renderSubItems(cat);
-    }
-
-    function renderSubItems(cat) {
-      const section = document.getElementById('sub-section');
-      const container = document.getElementById('sub-items');
-      const header = document.getElementById('sub-header-text');
-      const otherBox = document.getElementById('other-input-box');
-
-      header.textContent = 'Pilih jenis barang — ' + cat;
-      container.innerHTML = '';
-      otherBox.classList.remove('visible');
-      document.getElementById('other-item-input').value = '';
-
-      (catalog[cat] || []).forEach(item => {
-        const chip = document.createElement('button');
-        chip.className = 'item-chip';
-        chip.textContent = item;
-        chip.onclick = () => selectItem(item, chip);
-        container.appendChild(chip);
-      });
-
-      const otherChip = document.createElement('button');
-      otherChip.className = 'item-chip';
-      otherChip.textContent = '+ Lainnya';
-      otherChip.onclick = () => selectItem('__other__', otherChip);
-      container.appendChild(otherChip);
-
-      section.classList.add('visible');
-    }
-
-    function selectItem(item, chip) {
-      document.querySelectorAll('.item-chip').forEach(c => c.classList.remove('selected'));
-      chip.classList.add('selected');
-      selectedItem = item;
-      const otherBox = document.getElementById('other-input-box');
-      if (item === '__other__') {
-        otherBox.classList.add('visible');
-        document.getElementById('other-item-input').focus();
-      } else {
-        otherBox.classList.remove('visible');
-        document.getElementById('other-item-input').value = '';
-      }
-    }
-
-    function changeQty(delta) {
-      const inp = document.getElementById('qty-input');
-      inp.value = Math.max(1, Math.min(999, (parseInt(inp.value) || 1) + delta));
-    }
-
-    async function handleSubmit() {
-      const nama = document.getElementById('nama').value.trim();
-      const dept = document.getElementById('dept').value.trim();
-      const qty = document.getElementById('qty-input').value;
-      const satuan = document.getElementById('unit-sel').value;
-      const catatan = document.getElementById('catatan').value.trim();
-
-      let namaBarang = selectedItem;
-      if (selectedItem === '__other__') {
-        const otherVal = document.getElementById('other-item-input').value.trim();
-        if (!otherVal) { alert('Mohon isi nama barang lainnya.'); return; }
-        namaBarang = 'Lainnya: ' + otherVal;
-      }
-
-      if (!nama || !dept || !selectedCat || !namaBarang) {
-        alert('Mohon lengkapi semua field yang wajib diisi (*)');
-        return;
-      }
-
-      const btn = document.getElementById('submit-btn');
-      btn.disabled = true;
-      btn.innerHTML = '<i class="ti ti-loader-2"></i> Mengirim...';
-
-      const timestamp = new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' });
-      const payload = { timestamp, nama, dept, kategori: selectedCat, namaBarang, jumlah: qty, satuan, catatan };
-
-      try {
-        await fetch(SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-        showSuccess();
-      } catch(e) {
-        alert('Gagal mengirim data. Cek koneksi internet dan coba lagi.');
-        btn.disabled = false;
-        btn.innerHTML = '<i class="ti ti-send"></i> Kirim Data';
-      }
-    }
-
-    function showSuccess() {
-      document.getElementById('main-form').style.display = 'none';
-      document.getElementById('success-card').classList.add('visible');
-    }
-
-    function resetForm() {
-      document.getElementById('nama').value = '';
-      document.getElementById('dept').value = '';
-      document.getElementById('catatan').value = '';
-      document.getElementById('qty-input').value = '1';
-      selectedCat = '';
-      selectedItem = '';
-      const btn = document.getElementById('submit-btn');
-      btn.disabled = false;
-      btn.innerHTML = '<i class="ti ti-send"></i> Kirim Data';
-      document.getElementById('main-form').style.display = 'block';
-      document.getElementById('success-card').classList.remove('visible');
-      loadCatalog();
-    }
-
+  function retryLoad() {
+    document.getElementById('catalog-container').innerHTML = `<div class="loading-state"><i class="ti ti-refresh"></i><span>Memuat ulang...</span></div>`;
     loadCatalog();
-  </script>
+  }
+
+  function renderCatalog() {
+    const container = document.getElementById('catalog-container');
+    container.innerHTML = '';
+
+    const grid = document.createElement('div');
+    grid.className = 'category-grid';
+    grid.id = 'cat-grid';
+
+    Object.keys(catalog).forEach(cat => {
+      const icon = CATEGORY_ICONS[cat] || DEFAULT_ICON;
+      const btn = document.createElement('button');
+      btn.className = 'cat-btn';
+      btn.dataset.cat = cat;
+      btn.innerHTML = `<i class="ti ${icon} cat-icon"></i><span class="cat-name">${cat}</span>`;
+      btn.onclick = () => selectCat(cat, btn);
+      grid.appendChild(btn);
+    });
+
+    const subSection = document.createElement('div');
+    subSection.className = 'sub-section';
+    subSection.id = 'sub-section';
+    subSection.innerHTML = `
+      <div class="sub-header"><i class="ti ti-list"></i><span id="sub-header-text">Pilih jenis barang</span></div>
+      <div class="sub-items" id="sub-items"></div>`;
+
+    container.appendChild(grid);
+    container.appendChild(subSection);
+  }
+
+  function selectCat(cat, btn) {
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedCat = cat;
+    selectedItem = '';
+    document.getElementById('item-qty-section').style.display = 'none';
+    renderSubItems(cat);
+  }
+
+  function renderSubItems(cat) {
+    const section = document.getElementById('sub-section');
+    const container = document.getElementById('sub-items');
+    document.getElementById('sub-header-text').textContent = 'Pilih jenis barang — ' + cat;
+    container.innerHTML = '';
+
+    (catalog[cat] || []).forEach(item => {
+      const chip = document.createElement('button');
+      chip.className = 'item-chip';
+      chip.textContent = item;
+      chip.onclick = () => selectItem(item, chip);
+      container.appendChild(chip);
+    });
+
+    section.classList.add('visible');
+  }
+
+  function selectItem(item, chip) {
+    document.querySelectorAll('.item-chip').forEach(c => c.classList.remove('selected'));
+    chip.classList.add('selected');
+    selectedItem = item;
+    document.getElementById('item-qty').value = 1;
+    document.getElementById('item-qty-section').style.display = 'block';
+  }
+
+  // ── Lainnya ──
+  function toggleLainnya() {
+    const form = document.getElementById('lainnya-form');
+    const btn = document.getElementById('lainnya-toggle');
+    const open = form.classList.toggle('visible');
+    btn.classList.toggle('active', open);
+    if (open) document.getElementById('lainnya-nama').focus();
+  }
+
+  function addLainnya() {
+    const nama = document.getElementById('lainnya-nama').value.trim();
+    if (!nama) { alert('Mohon isi nama barang.'); return; }
+    const kat = document.getElementById('lainnya-kat').value.trim() || 'Lainnya';
+    const qty = parseInt(document.getElementById('lainnya-qty').value) || 1;
+    const unit = document.getElementById('lainnya-unit').value;
+    pushCart({ kategori: kat, nama, jumlah: qty, satuan: unit });
+    document.getElementById('lainnya-nama').value = '';
+    document.getElementById('lainnya-kat').value = '';
+    document.getElementById('lainnya-qty').value = 1;
+    document.getElementById('lainnya-form').classList.remove('visible');
+    document.getElementById('lainnya-toggle').classList.remove('active');
+  }
+
+  // ── Cart ──
+  function addToCart() {
+    if (!selectedItem) return;
+    const qty = parseInt(document.getElementById('item-qty').value) || 1;
+    const unit = document.getElementById('item-unit').value;
+    pushCart({ kategori: selectedCat, nama: selectedItem, jumlah: qty, satuan: unit });
+    // Reset selection
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
+    document.querySelectorAll('.item-chip').forEach(c => c.classList.remove('selected'));
+    document.getElementById('sub-section').classList.remove('visible');
+    document.getElementById('item-qty-section').style.display = 'none';
+    selectedCat = '';
+    selectedItem = '';
+  }
+
+  function pushCart(item) {
+    cart.push(item);
+    renderCart();
+  }
+
+  function removeFromCart(idx) {
+    cart.splice(idx, 1);
+    renderCart();
+  }
+
+  function renderCart() {
+    const list = document.getElementById('cart-list');
+    const countEl = document.getElementById('cart-count');
+    list.innerHTML = '';
+
+    if (cart.length === 0) {
+      list.innerHTML = '<div class="cart-empty">Belum ada barang ditambahkan</div>';
+      countEl.style.display = 'none';
+      return;
+    }
+
+    countEl.style.display = 'inline';
+    countEl.textContent = cart.length + ' item';
+
+    cart.forEach((item, idx) => {
+      const row = document.createElement('div');
+      row.className = 'cart-item';
+      row.innerHTML = `
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.nama}</div>
+          <div class="cart-item-meta">${item.kategori}</div>
+        </div>
+        <div class="cart-item-qty">${item.jumlah} ${item.satuan}</div>
+        <button class="cart-remove" onclick="removeFromCart(${idx})" aria-label="Hapus"><i class="ti ti-x" style="font-size:16px;"></i></button>`;
+      list.appendChild(row);
+    });
+  }
+
+  function changeQty(type, delta) {
+    const id = type === 'item' ? 'item-qty' : 'lainnya-qty';
+    const inp = document.getElementById(id);
+    inp.value = Math.max(1, Math.min(999, (parseInt(inp.value) || 1) + delta));
+  }
+
+  // ── Submit ──
+  async function handleSubmit() {
+    const nama = document.getElementById('nama').value.trim();
+    const dept = document.getElementById('dept').value.trim();
+    const catatan = document.getElementById('catatan').value.trim();
+
+    if (!nama || !dept) { alert('Mohon isi nama dan departemen.'); return; }
+    if (cart.length === 0) { alert('Mohon tambahkan minimal satu barang.'); return; }
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.innerHTML = '<i class="ti ti-loader-2"></i> Mengirim...';
+
+    const timestamp = new Date().toLocaleString('id-ID', { timeZone: 'Asia/Jakarta' });
+    const payload = { timestamp, nama, dept, items: cart, catatan };
+
+    try {
+      await fetch(SCRIPT_URL, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      showSuccess();
+    } catch(e) {
+      alert('Gagal mengirim data. Cek koneksi dan coba lagi.');
+      btn.disabled = false;
+      btn.innerHTML = '<i class="ti ti-send"></i> Kirim Semua Data';
+    }
+  }
+
+  function showSuccess() {
+    document.getElementById('main-form').style.display = 'none';
+    document.getElementById('success-card').classList.add('visible');
+  }
+
+  function resetForm() {
+    document.getElementById('nama').value = '';
+    document.getElementById('dept').value = '';
+    document.getElementById('catatan').value = '';
+    cart = [];
+    selectedCat = '';
+    selectedItem = '';
+    renderCart();
+    document.getElementById('item-qty-section').style.display = 'none';
+    document.getElementById('lainnya-form').classList.remove('visible');
+    document.getElementById('lainnya-toggle').classList.remove('active');
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = false;
+    btn.innerHTML = '<i class="ti ti-send"></i> Kirim Semua Data';
+    document.getElementById('main-form').style.display = 'block';
+    document.getElementById('success-card').classList.remove('visible');
+    loadCatalog();
+  }
+
+  loadCatalog();
+</script>
 </body>
 </html>
