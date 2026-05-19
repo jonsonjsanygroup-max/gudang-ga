@@ -44,14 +44,11 @@
     .error-state { display: flex; align-items: flex-start; gap: 10px; padding: 1rem; background: #FCEBEB; border: 0.5px solid #F09595; border-radius: var(--radius-md); color: #A32D2D; font-size: 14px; }
     .retry-link { color: var(--blue); cursor: pointer; text-decoration: underline; margin-top: 6px; display: inline-block; font-size: 13px; }
 
-    /* Category */
-    .category-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 8px; }
-    .cat-btn { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 6px; background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-md); cursor: pointer; transition: all 0.15s; text-align: center; width: 100%; }
-    .cat-btn:hover { background: var(--surface); border-color: var(--border-strong); }
-    .cat-btn.selected { background: var(--blue-light); border-color: var(--blue-mid); }
-    .cat-btn.selected .cat-icon, .cat-btn.selected .cat-name { color: var(--blue); }
-    .cat-icon { font-size: 20px; color: var(--text-muted); }
-    .cat-name { font-size: 11.5px; font-weight: 500; color: var(--text-muted); line-height: 1.3; }
+    /* Category chips — text only */
+    .chip-group { display: flex; flex-wrap: wrap; gap: 7px; }
+    .cat-chip { padding: 7px 14px; background: var(--bg); border: 0.5px solid var(--border); border-radius: 20px; font-size: 13px; font-weight: 500; color: var(--text-muted); cursor: pointer; transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
+    .cat-chip:hover { background: var(--surface); border-color: var(--border-strong); color: var(--text); }
+    .cat-chip.selected { background: var(--blue-light); border-color: var(--blue-mid); color: var(--blue); }
 
     /* Sub items */
     .sub-section { margin-top: 10px; border: 0.5px solid var(--border); border-radius: var(--radius-md); overflow: hidden; display: none; }
@@ -64,31 +61,27 @@
     .item-chip:hover { background: var(--bg); border-color: var(--border-strong); }
     .item-chip.selected { background: var(--blue-light); border-color: var(--blue-mid); color: var(--blue); }
 
-    /* Lainnya button — standalone */
+    /* Lainnya */
     .lainnya-btn { display: flex; align-items: center; gap: 8px; margin-top: 10px; padding: 9px 14px; background: var(--bg); border: 0.5px dashed var(--border-strong); border-radius: var(--radius-md); cursor: pointer; font-size: 13px; font-weight: 500; color: var(--text-muted); font-family: 'DM Sans', sans-serif; width: 100%; transition: all 0.15s; }
     .lainnya-btn:hover { background: var(--surface); color: var(--text); }
     .lainnya-btn.active { background: var(--blue-light); border-color: var(--blue-mid); color: var(--blue); }
     .lainnya-form { display: none; margin-top: 8px; background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-md); padding: 12px; }
     .lainnya-form.visible { display: block; }
-    .lainnya-row { display: flex; gap: 8px; align-items: flex-end; flex-wrap: wrap; }
-    .lainnya-row input[type="text"] { flex: 1; min-width: 140px; }
 
-    /* Qty row */
+    /* Qty */
     .qty-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
     .qty-btn { width: 36px; height: 36px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-md); cursor: pointer; font-size: 20px; color: var(--text); transition: background 0.1s; }
     .qty-btn:hover { background: var(--surface); border-color: var(--border-strong); }
     .qty-input-sm { text-align: center; width: 60px !important; flex-shrink: 0; }
 
-    /* Add to cart button */
+    /* Add button */
     .add-btn { display: flex; align-items: center; justify-content: center; gap: 6px; margin-top: 12px; width: 100%; padding: 10px; font-size: 14px; font-weight: 500; background: var(--surface); color: var(--blue); border: 0.5px solid var(--blue-mid); border-radius: var(--radius-md); cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.15s; }
     .add-btn:hover { background: var(--blue-light); }
-    .add-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
-    /* Cart / daftar barang */
-    .cart-section { margin-top: 1rem; }
+    /* Cart */
     .cart-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
     .cart-title { font-size: 10.5px; font-weight: 500; color: var(--text-hint); letter-spacing: 0.08em; text-transform: uppercase; }
-    .cart-count { font-size: 12px; font-weight: 500; color: var(--blue); background: var(--blue-light); padding: 2px 8px; border-radius: 10px; }
+    .cart-count { font-size: 12px; font-weight: 500; color: var(--blue); background: var(--blue-light); padding: 2px 8px; border-radius: 10px; display: none; }
     .cart-empty { padding: 12px; text-align: center; font-size: 13px; color: var(--text-hint); background: var(--bg); border: 0.5px dashed var(--border); border-radius: var(--radius-md); }
     .cart-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-md); margin-bottom: 6px; }
     .cart-item-info { flex: 1; min-width: 0; }
@@ -143,7 +136,6 @@
     <div class="divider"></div>
     <p class="section-label">Tambah barang</p>
 
-    <!-- Catalog -->
     <div class="field-group">
       <label class="field-label">Pilih kategori</label>
       <div id="catalog-container">
@@ -151,7 +143,7 @@
       </div>
     </div>
 
-    <!-- Qty picker for catalog item -->
+    <!-- Qty & add for catalog item -->
     <div id="item-qty-section" style="display:none;">
       <div class="qty-row">
         <button class="qty-btn" onclick="changeQty('item',-1)">−</button>
@@ -163,17 +155,17 @@
           <option>botol</option><option>buah</option>
         </select>
       </div>
-      <button class="add-btn" id="add-item-btn" onclick="addToCart()">
+      <button class="add-btn" onclick="addToCart()">
         <i class="ti ti-plus"></i> Tambah ke daftar
       </button>
     </div>
 
-    <!-- Lainnya standalone -->
+    <!-- Lainnya — single standalone -->
     <button class="lainnya-btn" id="lainnya-toggle" onclick="toggleLainnya()">
       <i class="ti ti-pencil-plus"></i> Barang tidak ada di daftar? Isi manual
     </button>
     <div class="lainnya-form" id="lainnya-form">
-      <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">Nama barang & kategori</div>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:8px;">Isi nama dan kategori barang</div>
       <input type="text" id="lainnya-nama" placeholder="Nama barang..." style="margin-bottom:8px;" />
       <input type="text" id="lainnya-kat" placeholder="Kategori (opsional)..." style="margin-bottom:8px;" />
       <div class="qty-row" style="margin-top:0;">
@@ -192,15 +184,13 @@
     </div>
 
     <!-- Cart -->
-    <div class="cart-section">
-      <div class="divider"></div>
-      <div class="cart-header">
-        <span class="cart-title">Daftar barang diambil</span>
-        <span class="cart-count" id="cart-count" style="display:none;">0 item</span>
-      </div>
-      <div id="cart-list">
-        <div class="cart-empty">Belum ada barang ditambahkan</div>
-      </div>
+    <div class="divider"></div>
+    <div class="cart-header">
+      <span class="cart-title">Daftar barang diambil</span>
+      <span class="cart-count" id="cart-count">0 item</span>
+    </div>
+    <div id="cart-list">
+      <div class="cart-empty">Belum ada barang ditambahkan</div>
     </div>
 
     <div class="divider"></div>
@@ -225,19 +215,11 @@
 <script>
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwDnCV4cQONa745zOSyftoHDe6okhKJ09E4ZB7dgwv2SnEzMeGywOwkuAPiXah5CUl1/exec';
 
-  const CATEGORY_ICONS = {
-    'Alat Tulis':'ti-pencil','Kertas & Buku':'ti-notebook','Stapler & Klip':'ti-tool',
-    'Tinta & Toner':'ti-droplet','Map & Bantex':'ti-folder','Amplop & Label':'ti-mail',
-    'Kebersihan':'ti-sparkles','Elektronik & Baterai':'ti-bolt'
-  };
-  const DEFAULT_ICON = 'ti-package';
-
   let catalog = {};
   let selectedCat = '';
   let selectedItem = '';
   let cart = [];
 
-  // ── Load catalog ──
   async function loadCatalog() {
     try {
       const res = await fetch(SCRIPT_URL);
@@ -260,20 +242,21 @@
     const container = document.getElementById('catalog-container');
     container.innerHTML = '';
 
-    const grid = document.createElement('div');
-    grid.className = 'category-grid';
-    grid.id = 'cat-grid';
+    // Category chips
+    const chipGroup = document.createElement('div');
+    chipGroup.className = 'chip-group';
+    chipGroup.id = 'cat-grid';
 
     Object.keys(catalog).forEach(cat => {
-      const icon = CATEGORY_ICONS[cat] || DEFAULT_ICON;
-      const btn = document.createElement('button');
-      btn.className = 'cat-btn';
-      btn.dataset.cat = cat;
-      btn.innerHTML = `<i class="ti ${icon} cat-icon"></i><span class="cat-name">${cat}</span>`;
-      btn.onclick = () => selectCat(cat, btn);
-      grid.appendChild(btn);
+      const chip = document.createElement('button');
+      chip.className = 'cat-chip';
+      chip.textContent = cat;
+      chip.dataset.cat = cat;
+      chip.onclick = () => selectCat(cat, chip);
+      chipGroup.appendChild(chip);
     });
 
+    // Sub items section
     const subSection = document.createElement('div');
     subSection.className = 'sub-section';
     subSection.id = 'sub-section';
@@ -281,13 +264,13 @@
       <div class="sub-header"><i class="ti ti-list"></i><span id="sub-header-text">Pilih jenis barang</span></div>
       <div class="sub-items" id="sub-items"></div>`;
 
-    container.appendChild(grid);
+    container.appendChild(chipGroup);
     container.appendChild(subSection);
   }
 
-  function selectCat(cat, btn) {
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
-    btn.classList.add('selected');
+  function selectCat(cat, chip) {
+    document.querySelectorAll('.cat-chip').forEach(b => b.classList.remove('selected'));
+    chip.classList.add('selected');
     selectedCat = cat;
     selectedItem = '';
     document.getElementById('item-qty-section').style.display = 'none';
@@ -319,7 +302,6 @@
     document.getElementById('item-qty-section').style.display = 'block';
   }
 
-  // ── Lainnya ──
   function toggleLainnya() {
     const form = document.getElementById('lainnya-form');
     const btn = document.getElementById('lainnya-toggle');
@@ -342,14 +324,13 @@
     document.getElementById('lainnya-toggle').classList.remove('active');
   }
 
-  // ── Cart ──
   function addToCart() {
     if (!selectedItem) return;
     const qty = parseInt(document.getElementById('item-qty').value) || 1;
     const unit = document.getElementById('item-unit').value;
     pushCart({ kategori: selectedCat, nama: selectedItem, jumlah: qty, satuan: unit });
-    // Reset selection
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('selected'));
+    // Reset
+    document.querySelectorAll('.cat-chip').forEach(b => b.classList.remove('selected'));
     document.querySelectorAll('.item-chip').forEach(c => c.classList.remove('selected'));
     document.getElementById('sub-section').classList.remove('visible');
     document.getElementById('item-qty-section').style.display = 'none';
@@ -401,7 +382,6 @@
     inp.value = Math.max(1, Math.min(999, (parseInt(inp.value) || 1) + delta));
   }
 
-  // ── Submit ──
   async function handleSubmit() {
     const nama = document.getElementById('nama').value.trim();
     const dept = document.getElementById('dept').value.trim();
